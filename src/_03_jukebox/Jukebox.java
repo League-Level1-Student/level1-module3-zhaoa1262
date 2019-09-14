@@ -5,6 +5,8 @@ package _03_jukebox;
  */
 
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -12,18 +14,35 @@ import java.net.URL;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.SwingUtilities;
+import javax.swing.JPanel;
+
 
 import javazoom.jl.player.advanced.AdvancedPlayer;
 
 /*   If you don't have javazoom.jar in your project, you can download it from here: http://bit.ly/javazoom
  *   Right click your project and add it as a JAR (Under Java Build Path > Libraries).*/
 
-public class Jukebox implements Runnable {
-
+public class Jukebox implements Runnable, ActionListener {
+	
+		static JFrame frame = new JFrame("Jukebox");
+		static JPanel panel = new JPanel();
+		static JButton songAdios = new JButton("Adios - Everglow");
+		static JButton songMiroh = new JButton("Miroh - Stray Kids");
+		Song Adios = new Song("Adios.mp3");
+		Song Miroh = new Song("Miroh.mp3");
+		
     public void run() {
-
+    	frame.setVisible(true);
+		panel.add(songAdios);
+		panel.add(songMiroh);
+		frame.add(panel);
+		frame.pack();
+		songAdios.addActionListener(this);
+		songMiroh.addActionListener(this);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// 1. Find an mp3 on your computer or on the Internet.
 		// 2. Create a Song object for that mp3
 
@@ -46,7 +65,26 @@ public class Jukebox implements Runnable {
 		return new JLabel(icon);
 	}
 
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		JButton buttonPressed = (JButton) e.getSource();
+		if(buttonPressed == songAdios) {
+			Miroh.stop();
+			Adios.play();
+		}
+		
+		if(buttonPressed == songMiroh) {
+			Adios.stop();
+			Miroh.play();
+		}
+		frame.pack();
+	}
 }
+
+
+
 
 class Song {
 

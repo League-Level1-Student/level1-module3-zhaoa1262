@@ -4,10 +4,24 @@ package _03_jukebox;
  *    Level 1
  */
 
+
 import javax.swing.SwingUtilities;
 
 public class JukeboxRunner {
+	
+	Song Adios = new Song("Adios.mp3");
+	
+	Song Miroh = new Song("Miroh.mp3");
+	
+	
 	public static void main(String[] args) {
+		
+		
+		
 		SwingUtilities.invokeLater(new Jukebox());
 	}
 }
+
+
+
+	
