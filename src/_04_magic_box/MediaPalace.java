@@ -31,9 +31,9 @@ public class MediaPalace {
 	/*
 	 * To use this method, the image must be placed in your Eclipse project in the same package as this class.
 	 */
-	public JLabel loadImageFromWithinProject(String fileName) {
-		URL imageURL = getClass().getResource(fileName);
-		Icon icon = new ImageIcon(imageURL);
+	public JLabel loadImageFromWithinProject(String hedgehog) {
+		URL imageURL = getClass().getResource("hedgehog.jpg");
+		Icon icon = new ImageIcon("https://resize.hswstatic.com/w_907/gif/hedgehog-pet.jpg");
 		return new JLabel(icon);
 	}
 
