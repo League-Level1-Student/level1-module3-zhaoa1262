@@ -3,7 +3,7 @@ int frogY = 550;
 Car car1 = new Car(50, 50, 60, 5); 
 Car car2 = new Car(275, 200, 60, 5);
 Car car3 = new Car(500, 350, 60, 5); 
-Car car4 = new Car(715, 500, 60, 5); 
+Car car4 = new Car(715, 475, 60, 5); 
 
 void setup() {
 size(800, 600);
@@ -14,7 +14,7 @@ void draw() {
 background(187, 234, 228);
 fill(55, 160, 61);
 noStroke();
-ellipse(300, 575, 20, 20);
+ellipse(frogX, frogY, 20, 20);
 
 car1.display();
 car1.move("left");
@@ -25,25 +25,43 @@ car3.move("left");
 car4.display();
 car4.move("right");
 
+if(intersects(car1) == true) {
+  frogX = 300;
+  frogY = 550;
+}
+if(intersects(car2) == true) {
+  frogX = 300;
+  frogY = 550;
+}
+if(intersects(car3) == true) {
+  frogX = 300;
+  frogY = 550;
+}
+if(intersects(car4) == true) {
+  frogX = 300;
+  frogY = 550;
+}
+
 }
 
 void keyPressed() {
 if(key == CODED) {
-frogY = frogY-1;
+  if(keyCode==UP) {
+frogY = frogY-10;
 }
 
 else if(keyCode == DOWN) {
-frogY = frogY+1;
+frogY = frogY+10;
 }
 
 else if(keyCode == RIGHT) {
-frogX = frogX + 1;
+frogX = frogX + 10;
 }
 
 else if(keyCode == LEFT) {
-frogX = frogX - 1;
+frogX = frogX - 10;
 }
-
+}
 }
 
 void Boundaries () {
@@ -62,7 +80,20 @@ frogY = 0;
 else if (frogX >= 600) {
 frogX = 600;
 }
+
 }
+
+boolean intersects(Car car) {
+ if ((frogY > car.getY() && frogY < car.getY()+50) &&
+                (frogX > car.getX() && frogX < car.getX()+car.getSize())) {
+   return true;
+  }
+ else  {
+  return false;
+ }
+}
+
+
 
 public class Car  {
   
@@ -105,22 +136,16 @@ void display()
   }
 
 
-void getX() {
-
+int getX() {
+return carXPosition;
 }
-void getY() {
-
+int getY() {
+return carYPosition;
 }
-void Size() {
-
+int getSize() {
+return sizeOfCar;
 }
 
-boolean intersects(Car car) {
- if ((frogY > car.getY() && frogY < car.getY()+50) &&
-                (frogX > car.getX() && frogX < car.getX()+car.getSize())) {
-   return true;
-  }
- else  {
-  return false;
- }
+
+
 }
